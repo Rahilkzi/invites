@@ -1,0 +1,69 @@
+// src/components/MapComponent.js
+import React, { useEffect, useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import axios from "axios";
+
+const MapComponent = () => {
+  const [locations, setLocations] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Assuming the JSON data is in a file named 'data.json' in the public folder
+        const response = await axios.get("/invite.json");
+        const processedData = response.data.map((item) => ({
+          name: item.Name,
+          location: item.Location,
+        }));
+        setLocations(processedData);
+      } catch (error) {
+        console.error("Error fetching the data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  return (
+    <MapContainer
+      center={[19.076, 72.8777]}
+      zoom={10}
+      style={{ height: "100vh", width: "100%" }}
+    >
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      />
+      {locations.map((location, index) => {
+        // You can implement a geocoding service to get the coordinates from location names
+        // Here, we'll use dummy coordinates for demonstration
+        const coordinates = getCoordinates(location.location); // Implement this function
+        return (
+          <Marker key={index} position={coordinates}>
+            <Popup>{location.name}</Popup>
+          </Marker>
+        );
+      })}
+    </MapContainer>
+  );
+};
+
+// Dummy function to return coordinates based on location name (you'll want to replace this)
+const getCoordinates = (location) => {
+  const locationMapping = {
+    Mumbra: [19.1743, 72.9085],
+    Sewri: [19.0085, 72.8481],
+    Nalasopara: [19.3733, 72.7846],
+    Kurla: [19.0705, 72.8956],
+    Thane: [19.2183, 72.9781],
+    Rajapur: [16.6781, 73.5566],
+    Gothne: [17.9957, 73.6528],
+    Dockyard: [18.9478, 72.8468],
+    Seawoods: [19.0492, 73.0202],
+    Ratnagiri: [16.9953, 73.3143],
+    Govandi: [19.0592, 72.9235],
+    // Add more locations as needed
+  };
+  return locationMapping[location.trim()] || [19.076, 72.8777]; // Default to Mumbai coordinates
+};
+
+export default MapComponent;

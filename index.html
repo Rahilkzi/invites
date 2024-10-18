@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React + TypeScript + Replit</title>
+    <style>
+      /* app.css */
+      /* app.css */
+      body,
+      html {
+        margin: 0;
+        height: 100%;
+      }
+
+      .map-container {
+        height: 100vh; /* Full height of the viewport */
+        width: 100vw; /* Full width of the viewport */
+      }
+
+      .leaflet-popup-content {
+        font-size: 14px; /* Change font size for popups */
+      }
+      .map-container {
+        max-width: 800px;
+        margin: 0 auto; /* Center the map */
+      }
+
+      /* In your CSS file or within a <style> tag */
+      @media (max-width: 600px) {
+        .leaflet-popup-content {
+          font-size: 12px; /* Adjust font size for smaller devices */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/index.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+/* app.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.map-container {
+    max-width: 800px;
+    margin: 0 auto; /* Center the map */
+}
+
+.leaflet-popup-content {
+    font-size: 14px; /* Change font size for popups */
+}
+/* In your CSS file or within a <style> tag */
+@media (max-width: 600px) {
+    .leaflet-popup-content {
+        font-size: 12px; /* Adjust font size for smaller devices */
+    }
+}
